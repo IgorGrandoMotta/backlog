@@ -1,6 +1,8 @@
-/* src/index.css */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* ============================================================
+   VARIÁVEIS BASE (tema dark — padrão)
+   ============================================================ */
 :root {
   --bg: #0d0f14;
   --bg2: #13161d;
@@ -27,8 +29,361 @@
   --font-display: 'Rajdhani', sans-serif;
   --font-body: 'DM Sans', sans-serif;
   --shadow: 0 4px 24px rgba(0,0,0,0.5);
+  /* background visual do tema */
+  --theme-bg-image: none;
+  --theme-bg-overlay: none;
+  --card-glass: rgba(255,255,255,0.03);
+  --card-glass-border: rgba(255,255,255,0.07);
+  --scrollbar-thumb: #222738;
+  --glow: rgba(124,106,255,0.15);
 }
 
+/* ============================================================
+   TEMA: LIGHT
+   ============================================================ */
+[data-theme="light"] {
+  --bg: #f0f2f8;
+  --bg2: #ffffff;
+  --bg3: #e8eaf2;
+  --bg4: #d8dce8;
+  --border: rgba(0,0,0,0.08);
+  --border2: rgba(0,0,0,0.14);
+  --text: #1a1d2e;
+  --text2: #5a5f7a;
+  --text3: #9096b0;
+  --accent: #5b4fff;
+  --accent2: #7c6aff;
+  --accent-bg: rgba(91,79,255,0.10);
+  --green: #059669;
+  --green-bg: rgba(5,150,105,0.10);
+  --blue: #2563eb;
+  --blue-bg: rgba(37,99,235,0.10);
+  --amber: #d97706;
+  --amber-bg: rgba(217,119,6,0.10);
+  --red: #dc2626;
+  --red-bg: rgba(220,38,38,0.10);
+  --shadow: 0 4px 24px rgba(0,0,0,0.10);
+  --card-glass: rgba(255,255,255,0.70);
+  --card-glass-border: rgba(0,0,0,0.08);
+  --scrollbar-thumb: #c8ccd8;
+  --glow: rgba(91,79,255,0.10);
+  --theme-bg-overlay: none;
+  --theme-bg-image: none;
+}
+
+[data-theme="light"] body {
+  background: var(--bg);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 20% -10%, rgba(124,106,255,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 90% 100%, rgba(96,165,250,0.10) 0%, transparent 60%);
+  background-attachment: fixed;
+}
+
+/* ============================================================
+   TEMA: CYBERPUNK
+   ============================================================ */
+[data-theme="cyberpunk"] {
+  --bg: #05010f;
+  --bg2: #0d0520;
+  --bg3: #130830;
+  --bg4: #1e1040;
+  --border: rgba(255,0,200,0.12);
+  --border2: rgba(0,255,255,0.18);
+  --text: #f0e8ff;
+  --text2: #a080c0;
+  --text3: #604880;
+  --accent: #ff00cc;
+  --accent2: #00ffff;
+  --accent-bg: rgba(255,0,204,0.12);
+  --green: #00ffaa;
+  --green-bg: rgba(0,255,170,0.10);
+  --blue: #00eeff;
+  --blue-bg: rgba(0,238,255,0.10);
+  --amber: #ffcc00;
+  --amber-bg: rgba(255,204,0,0.10);
+  --red: #ff2255;
+  --red-bg: rgba(255,34,85,0.10);
+  --shadow: 0 4px 32px rgba(255,0,200,0.25);
+  --card-glass: rgba(255,0,200,0.05);
+  --card-glass-border: rgba(0,255,255,0.15);
+  --scrollbar-thumb: #1e1040;
+  --glow: rgba(255,0,200,0.20);
+  --font-display: 'Orbitron', 'Rajdhani', sans-serif;
+}
+
+[data-theme="cyberpunk"] body {
+  background: var(--bg);
+  background-image:
+    /* grade neon horizontal/vertical */
+    linear-gradient(rgba(255,0,200,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,255,255,0.04) 1px, transparent 1px),
+    /* gradientes de brilho */
+    radial-gradient(ellipse 80% 60% at 50% -20%, rgba(255,0,200,0.18) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 50% at 100% 100%, rgba(0,255,255,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 30% at 0% 80%, rgba(120,0,255,0.15) 0%, transparent 55%);
+  background-size: 40px 40px, 40px 40px, 100% 100%, 100% 100%, 100% 100%;
+  background-attachment: fixed;
+}
+
+/* scanlines cyberpunk */
+[data-theme="cyberpunk"] body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0,0,0,0.08) 3px,
+    rgba(0,0,0,0.08) 4px
+  );
+}
+
+/* ============================================================
+   TEMA: TERMINAL / HACKER
+   ============================================================ */
+[data-theme="terminal"] {
+  --bg: #000000;
+  --bg2: #050f05;
+  --bg3: #0a1a0a;
+  --bg4: #102410;
+  --border: rgba(0,255,65,0.12);
+  --border2: rgba(0,255,65,0.22);
+  --text: #00ff41;
+  --text2: #00aa30;
+  --text3: #005518;
+  --accent: #00ff41;
+  --accent2: #39ff14;
+  --accent-bg: rgba(0,255,65,0.10);
+  --green: #00ff41;
+  --green-bg: rgba(0,255,65,0.10);
+  --blue: #00ccff;
+  --blue-bg: rgba(0,204,255,0.10);
+  --amber: #aaff00;
+  --amber-bg: rgba(170,255,0,0.10);
+  --red: #ff3333;
+  --red-bg: rgba(255,51,51,0.10);
+  --shadow: 0 4px 24px rgba(0,255,65,0.15);
+  --card-glass: rgba(0,255,65,0.04);
+  --card-glass-border: rgba(0,255,65,0.15);
+  --scrollbar-thumb: #102410;
+  --glow: rgba(0,255,65,0.20);
+  --font-display: 'Share Tech Mono', 'Courier New', monospace;
+  --font-body: 'Share Tech Mono', 'Courier New', monospace;
+}
+
+[data-theme="terminal"] body {
+  background: #000000;
+  background-image:
+    /* grade de pixels verdes suave */
+    radial-gradient(ellipse 60% 60% at 50% 40%, rgba(0,255,65,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 100% 100% at 50% 50%, rgba(0,80,20,0.40) 0%, transparent 100%);
+  background-attachment: fixed;
+}
+
+/* scanlines terminal */
+[data-theme="terminal"] body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.15) 2px,
+    rgba(0,0,0,0.15) 3px
+  );
+}
+
+/* phosphor glow pulsante nos textos */
+[data-theme="terminal"] body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(ellipse 80% 80% at 50% 50%, rgba(0,255,65,0.03) 0%, transparent 70%);
+  animation: terminalPulse 4s ease-in-out infinite;
+}
+
+@keyframes terminalPulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+/* ============================================================
+   TEMA: NINTENDO
+   ============================================================ */
+[data-theme="nintendo"] {
+  --bg: #1a0a2e;
+  --bg2: #230f3d;
+  --bg3: #2e1650;
+  --bg4: #3d2066;
+  --border: rgba(255,210,0,0.15);
+  --border2: rgba(255,210,0,0.28);
+  --text: #fff5e0;
+  --text2: #d4b8ff;
+  --text3: #8060b0;
+  --accent: #e4000f;
+  --accent2: #ff6b35;
+  --accent-bg: rgba(228,0,15,0.12);
+  --green: #00c94a;
+  --green-bg: rgba(0,201,74,0.12);
+  --blue: #0099ff;
+  --blue-bg: rgba(0,153,255,0.12);
+  --amber: #ffd200;
+  --amber-bg: rgba(255,210,0,0.12);
+  --red: #e4000f;
+  --red-bg: rgba(228,0,15,0.12);
+  --shadow: 0 4px 28px rgba(228,0,15,0.20);
+  --card-glass: rgba(255,255,255,0.06);
+  --card-glass-border: rgba(255,210,0,0.15);
+  --scrollbar-thumb: #3d2066;
+  --glow: rgba(228,0,15,0.18);
+  --font-display: 'Press Start 2P', 'Rajdhani', sans-serif;
+}
+
+[data-theme="nintendo"] body {
+  background: var(--bg);
+  background-image:
+    /* estrelas pixel */
+    radial-gradient(1px 1px at 15% 20%, rgba(255,210,0,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 35% 70%, rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 60% 15%, rgba(255,210,0,0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 80% 55%, rgba(255,255,255,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 90% 30%, rgba(255,100,0,0.5) 0%, transparent 100%),
+    radial-gradient(2px 2px at 45% 85%, rgba(255,210,0,0.4) 0%, transparent 100%),
+    radial-gradient(2px 2px at 70% 90%, rgba(255,255,255,0.3) 0%, transparent 100%),
+    /* glow principal */
+    radial-gradient(ellipse 70% 50% at 50% -10%, rgba(228,0,15,0.20) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 40% at 100% 100%, rgba(255,210,0,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 60% at 0% 100%, rgba(0,153,255,0.12) 0%, transparent 60%);
+  background-attachment: fixed;
+}
+
+/* ============================================================
+   TEMA: VINTAGE
+   ============================================================ */
+[data-theme="vintage"] {
+  --bg: #1c1510;
+  --bg2: #241c15;
+  --bg3: #2e2318;
+  --bg4: #3d2e1e;
+  --border: rgba(212,168,100,0.15);
+  --border2: rgba(212,168,100,0.28);
+  --text: #f5e8d0;
+  --text2: #c4a878;
+  --text3: #7a6040;
+  --accent: #d4a832;
+  --accent2: #e8c060;
+  --accent-bg: rgba(212,168,50,0.12);
+  --green: #7ab648;
+  --green-bg: rgba(122,182,72,0.12);
+  --blue: #6090c0;
+  --blue-bg: rgba(96,144,192,0.12);
+  --amber: #e8a820;
+  --amber-bg: rgba(232,168,32,0.12);
+  --red: #c04830;
+  --red-bg: rgba(192,72,48,0.12);
+  --shadow: 0 4px 24px rgba(0,0,0,0.60);
+  --card-glass: rgba(212,168,100,0.05);
+  --card-glass-border: rgba(212,168,100,0.15);
+  --scrollbar-thumb: #3d2e1e;
+  --glow: rgba(212,168,50,0.15);
+  --font-display: 'Playfair Display', 'Rajdhani', serif;
+  --font-body: 'Lora', 'DM Sans', serif;
+}
+
+[data-theme="vintage"] body {
+  background: var(--bg);
+  background-image:
+    /* textura de ruído/grão */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E"),
+    /* vinheta escura nas bordas */
+    radial-gradient(ellipse 100% 100% at 50% 50%, transparent 40%, rgba(0,0,0,0.55) 100%),
+    /* tons sépia aquecidos */
+    radial-gradient(ellipse 80% 60% at 30% 30%, rgba(180,120,40,0.12) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 80% at 80% 80%, rgba(100,60,20,0.18) 0%, transparent 65%);
+  background-attachment: fixed;
+}
+
+/* ============================================================
+   TEMA: NORDIC (NÓRDICO)
+   ============================================================ */
+[data-theme="nordic"] {
+  --bg: #0e1520;
+  --bg2: #141d2e;
+  --bg3: #1a2538;
+  --bg4: #213048;
+  --border: rgba(160,200,240,0.10);
+  --border2: rgba(160,200,240,0.18);
+  --text: #ddeeff;
+  --text2: #88aac8;
+  --text3: #4a6880;
+  --accent: #5eb8ff;
+  --accent2: #88d4ff;
+  --accent-bg: rgba(94,184,255,0.12);
+  --green: #64d8a0;
+  --green-bg: rgba(100,216,160,0.10);
+  --blue: #5eb8ff;
+  --blue-bg: rgba(94,184,255,0.10);
+  --amber: #f0c060;
+  --amber-bg: rgba(240,192,96,0.10);
+  --red: #ff7080;
+  --red-bg: rgba(255,112,128,0.10);
+  --shadow: 0 4px 28px rgba(0,20,50,0.60);
+  --card-glass: rgba(160,200,240,0.05);
+  --card-glass-border: rgba(160,200,240,0.12);
+  --scrollbar-thumb: #213048;
+  --glow: rgba(94,184,255,0.15);
+}
+
+[data-theme="nordic"] body {
+  background: var(--bg);
+  background-image:
+    /* aurora boreal */
+    radial-gradient(ellipse 120% 40% at 50% -5%, rgba(94,184,255,0.18) 0%, transparent 55%),
+    radial-gradient(ellipse 80% 30% at 30% 0%, rgba(100,216,160,0.12) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 25% at 75% 0%, rgba(180,100,255,0.10) 0%, transparent 50%),
+    /* fundo oceano profundo */
+    radial-gradient(ellipse 100% 70% at 50% 100%, rgba(5,10,30,0.80) 0%, transparent 80%);
+  background-attachment: fixed;
+}
+
+/* aurora animada */
+[data-theme="nordic"] body::before {
+  content: '';
+  position: fixed;
+  top: -30%;
+  left: -20%;
+  width: 140%;
+  height: 60%;
+  pointer-events: none;
+  z-index: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(94,184,255,0.06) 40%,
+    rgba(100,216,160,0.08) 50%,
+    rgba(180,100,255,0.06) 60%,
+    transparent 70%
+  );
+  filter: blur(40px);
+  animation: auroraShift 12s ease-in-out infinite alternate;
+}
+
+@keyframes auroraShift {
+  0%   { transform: translateX(-10%) rotate(-3deg); opacity: 0.7; }
+  100% { transform: translateX(10%) rotate(3deg);  opacity: 1; }
+}
+
+/* ============================================================
+   HTML / BODY BASE
+   ============================================================ */
 html { scroll-behavior: smooth; }
 body {
   background: var(--bg);
@@ -37,14 +392,29 @@ body {
   font-size: 15px;
   line-height: 1.6;
   min-height: 100vh;
+  position: relative;
 }
 
-/* scrollbar */
+/* dark — fundo padrão com glow sutil */
+[data-theme="dark"] body,
+body {
+  background: var(--bg);
+  background-image:
+    radial-gradient(ellipse 70% 50% at 50% -10%, rgba(124,106,255,0.10) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 100% 100%, rgba(96,165,250,0.06) 0%, transparent 60%);
+  background-attachment: fixed;
+}
+
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--bg4); border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 3px; }
 
-/* inputs e selects globais */
+/* ============================================================
+   INPUTS / SELECTS
+   ============================================================ */
 input, textarea, select {
   background: var(--bg3);
   border: 1px solid var(--border2);
@@ -57,18 +427,58 @@ input, textarea, select {
   outline: none;
   transition: border-color 0.2s;
 }
-input:focus, textarea:focus, select:focus {
-  border-color: var(--accent);
-}
+input:focus, textarea:focus, select:focus { border-color: var(--accent); }
 textarea { resize: vertical; min-height: 80px; }
 select option { background: var(--bg3); }
-
 button { cursor: pointer; font-family: var(--font-body); }
 
-/* animações */
-@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes spin { to { transform: rotate(360deg); } }
-@keyframes slideUp { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform: translateY(0); } }
-@keyframes pulse { 0%,100%{ opacity:1; } 50%{ opacity:.5; } }
+/* ============================================================
+   ANIMAÇÕES
+   ============================================================ */
+@keyframes fadeIn   { from { opacity: 0; transform: translateY(8px); }  to { opacity: 1; transform: translateY(0); } }
+@keyframes spin     { to { transform: rotate(360deg); } }
+@keyframes slideUp  { from { opacity:0; transform: translateY(20px); }   to { opacity:1; transform: translateY(0); } }
+@keyframes pulse    { 0%,100%{ opacity:1; } 50%{ opacity:.5; } }
 
 .fade-in { animation: fadeIn 0.35s ease both; }
+
+/* ============================================================
+   UTILITÁRIOS DE GLASS (usar nos cards/painéis)
+   ============================================================ */
+.glass {
+  background: var(--card-glass);
+  border: 1px solid var(--card-glass-border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* glow nos elementos com accent */
+[data-theme="cyberpunk"] .accent-glow,
+[data-theme="terminal"] .accent-glow,
+[data-theme="nintendo"] .accent-glow {
+  text-shadow: 0 0 8px var(--accent), 0 0 20px var(--accent);
+}
+
+/* cursor terminal */
+[data-theme="terminal"] input,
+[data-theme="terminal"] textarea {
+  caret-color: var(--accent);
+}
+[data-theme="terminal"] input::placeholder,
+[data-theme="terminal"] textarea::placeholder {
+  color: var(--text3);
+}
+
+/* override fonte terminal em botões/labels */
+[data-theme="terminal"] button,
+[data-theme="terminal"] label,
+[data-theme="terminal"] select {
+  font-family: var(--font-body);
+  letter-spacing: 0.05em;
+}
+
+/* nintendo — borda pixelada nos cards */
+[data-theme="nintendo"] .card-pixel {
+  image-rendering: pixelated;
+  border-style: solid;
+}
