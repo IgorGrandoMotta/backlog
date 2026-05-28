@@ -1,14 +1,14 @@
 // src/components/GameSearch.jsx
 import { useState, useRef, useEffect } from 'react';
-import { searchGames, coverUrl } from '../lib/igdb';
+import { searchGames } from '../lib/rawg';
 
 export function GameSearch({ onSelect }) {
-  const [query, setQuery] = useState('');
+  const [query, setQuery]     = useState('');
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [open, setOpen] = useState(false);
+  const [open, setOpen]       = useState(false);
   const timer = useRef(null);
-  const ref = useRef(null);
+  const ref   = useRef(null);
 
   useEffect(() => {
     const handler = (e) => { if (!ref.current?.contains(e.target)) setOpen(false); };
@@ -44,7 +44,7 @@ export function GameSearch({ onSelect }) {
           value={query}
           onChange={(e) => search(e.target.value)}
           onFocus={() => results.length && setOpen(true)}
-          placeholder="Buscar jogo na IGDB..."
+          placeholder="Buscar jogo (RAWG — +500k jogos)..."
           autoComplete="off"
         />
         {loading && (
@@ -60,7 +60,7 @@ export function GameSearch({ onSelect }) {
         <div style={{
           position:'absolute', top:'calc(100% + 6px)', left:0, right:0,
           background:'var(--bg3)', border:'1px solid var(--border2)',
-          borderRadius:'var(--radius)', zIndex:100, maxHeight:340, overflowY:'auto',
+          borderRadius:'var(--radius)', zIndex:100, maxHeight:360, overflowY:'auto',
           boxShadow:'var(--shadow)'
         }}>
           {results.map((g) => (
@@ -75,28 +75,30 @@ export function GameSearch({ onSelect }) {
               onMouseEnter={(e) => e.currentTarget.style.background = 'var(--bg4)'}
               onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
             >
-              {g.cover?.url
-                ? <img src={coverUrl(g.cover.url, 'cover_small')} alt="" width={32} height={42}
+              {g.coverUrl
+                ? <img src={g.coverUrl} alt="" width={32} height={42}
                     style={{ borderRadius:4, objectFit:'cover', flexShrink:0 }} />
-                : <div style={{ width:32, height:42, background:'var(--bg4)', borderRadius:4, flexShrink:0, display:'flex', alignItems:'center', justifyContent:'center', fontSize:18 }}>🎮</div>
+                : <div style={{ width:32, height:42, background:'var(--bg4)', borderRadius:4, flexShrink:0,
+                    display:'flex', alignItems:'center', justifyContent:'center', fontSize:18 }}>🎮</div>
               }
-              <div style={{ minWidth:0 }}>
-                <div style={{ fontSize:14, fontWeight:500, color:'var(--text)', whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis' }}>{g.name}</div>
-                <div style={{ fontSize:12, color:'var(--text2)' }}>
-                  {g.first_release_date
-                    ? new Date(g.first_release_date * 1000).getFullYear()
-                    : ''}
-                  {g.platforms?.length ? ' · ' + g.platforms.slice(0,3).map(p=>p.abbreviation).join(', ') : ''}
-                  {g.genres?.length ? ' · ' + g.genres[0].name : ''}
+              <div style={{ minWidth:0, flex:1 }}>
+                <div style={{ fontSize:14, fontWeight:500, color:'var(--text)', whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis' }}>
+                  {g.name}
+                </div>
+                <div style={{ fontSize:12, color:'var(--text2)', marginTop:1 }}>
+                  {g.released ? new Date(g.released).getFullYear() : ''}
+                  {g.platforms?.length ? ' · ' + g.platforms.slice(0,3).join(', ') : ''}
+                  {g.genres?.length ? ' · ' + g.genres[0] : ''}
                 </div>
               </div>
-              {g.aggregated_rating && (
+              {g.metacritic && (
                 <div style={{
-                  marginLeft:'auto', flexShrink:0, fontSize:12, fontWeight:600,
-                  color:'var(--amber)', background:'var(--amber-bg)',
-                  padding:'2px 8px', borderRadius:6
+                  flexShrink:0, fontSize:12, fontWeight:600,
+                  color: g.metacritic >= 75 ? 'var(--green)' : g.metacritic >= 50 ? 'var(--amber)' : 'var(--red)',
+                  background:'var(--bg4)', padding:'2px 8px', borderRadius:6,
+                  border:`1px solid ${g.metacritic >= 75 ? 'var(--green-bg)' : 'var(--border2)'}`
                 }}>
-                  {Math.round(g.aggregated_rating)}
+                  MC {g.metacritic}
                 </div>
               )}
             </div>
