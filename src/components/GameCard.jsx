@@ -51,14 +51,15 @@ export function GameCard({ game, onEdit, onDelete, onStatusChange }) {
           {/* imagem borrada cobrindo o card inteiro */}
           <div style={{
             position: 'absolute',
-            inset: 0,
+            inset: '-12px',
             backgroundImage: `url(${game.coverUrl})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             filter: 'blur(22px) saturate(1.6) brightness(0.7)',
-            transform: 'scale(1.15)',
             opacity: 0.55,
             zIndex: 0,
+            pointerEvents: 'none',
+            willChange: 'transform',
           }} />
           {/* overlay escuro semi-transparente para legibilidade */}
           <div style={{
@@ -66,6 +67,7 @@ export function GameCard({ game, onEdit, onDelete, onStatusChange }) {
             inset: 0,
             background: 'linear-gradient(90deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.60) 30%, rgba(0,0,0,0.72) 100%)',
             zIndex: 1,
+            pointerEvents: 'none',
           }} />
         </>
       )}
