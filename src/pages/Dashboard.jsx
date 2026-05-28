@@ -28,6 +28,29 @@ const NAV_ITEMS = [
   { key: 'wishlist',    label: 'Wishlist',     icon: '♡' },
 ];
 
+// ─── Logo SVG 3D (igual ao Login) ─────────────────────────────────────────────
+function SidebarLogo() {
+  return (
+    <svg width="38" height="38" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="10" y="18" width="44" height="30" rx="8" fill="rgba(0,0,0,0.6)" />
+      <rect x="6" y="14" width="44" height="30" rx="8" fill="#1a1a1a" stroke="rgba(255,255,255,0.12)" strokeWidth="1" />
+      <rect x="6" y="14" width="44" height="8" rx="8" fill="rgba(255,255,255,0.07)" />
+      <rect x="16" y="25" width="10" height="3" rx="1.5" fill="rgba(255,255,255,0.55)" />
+      <rect x="19.5" y="21.5" width="3" height="10" rx="1.5" fill="rgba(255,255,255,0.55)" />
+      <circle cx="42" cy="24" r="2.5" fill="rgba(255,255,255,0.20)" stroke="rgba(255,255,255,0.35)" strokeWidth="1" />
+      <circle cx="48" cy="27" r="2.5" fill="rgba(255,255,255,0.20)" stroke="rgba(255,255,255,0.35)" strokeWidth="1" />
+      <circle cx="42" cy="30" r="2.5" fill="rgba(255,255,255,0.20)" stroke="rgba(255,255,255,0.35)" strokeWidth="1" />
+      <circle cx="36" cy="27" r="2.5" fill="rgba(255,255,255,0.20)" stroke="rgba(255,255,255,0.35)" strokeWidth="1" />
+      <circle cx="22" cy="36" r="4" fill="#111" stroke="rgba(255,255,255,0.18)" strokeWidth="1" />
+      <circle cx="22" cy="36" r="2" fill="rgba(255,255,255,0.12)" />
+      <circle cx="36" cy="36" r="4" fill="#111" stroke="rgba(255,255,255,0.18)" strokeWidth="1" />
+      <circle cx="36" cy="36" r="2" fill="rgba(255,255,255,0.12)" />
+      <rect x="6" y="14" width="1.5" height="30" rx="1" fill="rgba(255,255,255,0.10)" />
+      <rect x="6" y="14" width="44" height="1.5" rx="1" fill="rgba(255,255,255,0.15)" />
+    </svg>
+  );
+}
+
 // ─── Toast ────────────────────────────────────────────────────────────────────
 function SavedToast({ visible }) {
   return (
@@ -61,10 +84,10 @@ function ConfirmDeleteModal({ onConfirm, onCancel }) {
         <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 18, marginBottom: 8 }}>Remover jogo?</h3>
         <p style={{ fontSize: 14, color: 'var(--text2)', marginBottom: 24 }}>Essa ação não pode ser desfeita.</p>
         <div style={{ display: 'flex', gap: 10, justifyContent: 'center' }}>
-          <button onClick={onCancel} style={{ background: 'none', border: '1px solid var(--border2)', color: 'var(--text2)', borderRadius: 'var(--radius-btn)', padding: '9px 20px', fontSize: 14, fontFamily: 'var(--font-body)', cursor: 'pointer' }}>
+          <button onClick={onCancel} style={{ background: 'none', border: '1px solid var(--border2)', color: 'var(--text2)', borderRadius: 'var(--radius)', padding: '9px 20px', fontSize: 14, fontFamily: 'var(--font-body)', cursor: 'pointer' }}>
             Cancelar
           </button>
-          <button onClick={onConfirm} style={{ background: 'var(--red-bg)', border: '1px solid rgba(248,113,113,0.3)', color: 'var(--red)', borderRadius: 'var(--radius-btn)', padding: '9px 20px', fontSize: 14, fontWeight: 600, fontFamily: 'var(--font-body)', cursor: 'pointer' }}>
+          <button onClick={onConfirm} style={{ background: 'var(--red-bg)', border: '1px solid rgba(248,113,113,0.3)', color: 'var(--red)', borderRadius: 'var(--radius)', padding: '9px 20px', fontSize: 14, fontWeight: 600, fontFamily: 'var(--font-body)', cursor: 'pointer' }}>
             Remover
           </button>
         </div>
@@ -81,17 +104,17 @@ function ThemeSelector({ theme, setTheme, themeOpen, setThemeOpen }) {
         onClick={() => setThemeOpen(o => !o)}
         style={{
           background: themeOpen ? 'var(--accent-bg)' : 'var(--bg3)',
-          border: `1px solid ${themeOpen ? 'var(--border-primary)' : 'var(--border2)'}`,
+          border: `1px solid ${themeOpen ? 'var(--border2)' : 'var(--border)'}`,
           color: themeOpen ? 'var(--accent2)' : 'var(--text3)',
-          borderRadius: 'var(--radius-btn)', padding: '5px 12px', fontSize: 11,
+          borderRadius: 'var(--radius)', padding: '7px 14px', fontSize: 12,
           fontFamily: 'var(--font-body)', cursor: 'pointer',
-          display: 'flex', alignItems: 'center', gap: 6, width: '100%',
-          letterSpacing: 0.5,
+          display: 'flex', alignItems: 'center', gap: 8, width: '100%',
+          letterSpacing: 0.4,
         }}
       >
-        <span style={{ fontSize: 13 }}>◐</span>
+        <span style={{ fontSize: 14 }}>◐</span>
         <span style={{ flex: 1, textAlign: 'left' }}>Tema</span>
-        <span style={{ fontSize: 10, opacity: 0.6 }}>{THEMES.find(t => t.key === theme)?.label || ''}</span>
+        <span style={{ fontSize: 11, opacity: 0.5 }}>{THEMES.find(t => t.key === theme)?.label || ''}</span>
       </button>
       {themeOpen && (
         <>
@@ -108,7 +131,7 @@ function ThemeSelector({ theme, setTheme, themeOpen, setThemeOpen }) {
                 onClick={() => { setTheme(t.key); setThemeOpen(false); }}
                 style={{
                   display: 'block', width: '100%', textAlign: 'left',
-                  padding: '9px 14px', fontSize: 12,
+                  padding: '10px 16px', fontSize: 13,
                   background: theme === t.key ? 'var(--accent-bg)' : 'transparent',
                   border: 'none', borderBottom: '1px solid var(--border)',
                   color: theme === t.key ? 'var(--accent2)' : 'var(--text2)',
@@ -183,7 +206,7 @@ function PlatformsTab({ games, onPlatformFilter }) {
               key={name}
               onClick={() => onPlatformFilter(name)}
               style={{ background: 'var(--bg2)', border: '1px solid var(--border)', borderRadius: 'var(--radius-lg)', padding: 16, cursor: 'pointer', transition: 'all 0.2s', display: 'flex', flexDirection: 'column', gap: 8 }}
-              onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--border-primary)'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--border2)'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
               onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.transform = 'translateY(0)'; }}
             >
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -227,18 +250,18 @@ function GenresTab({ games, onGenreFilter }) {
 
   const genreIcon = name => {
     const n = name.toLowerCase();
-    if (n.includes('action'))               return '⚔';
+    if (n.includes('action'))                    return '⚔';
     if (n.includes('rpg') || n.includes('role')) return '🧙';
-    if (n.includes('adventure'))            return '🗺';
-    if (n.includes('sport'))               return '⚽';
-    if (n.includes('racing'))              return '🏎';
-    if (n.includes('puzzle'))              return '🧩';
-    if (n.includes('horror'))              return '👻';
-    if (n.includes('shooter'))             return '🔫';
-    if (n.includes('strategy'))            return '♟';
-    if (n.includes('simulation'))          return '🌐';
-    if (n.includes('platform'))            return '🦘';
-    if (n.includes('fighting'))            return '🥊';
+    if (n.includes('adventure'))                 return '🗺';
+    if (n.includes('sport'))                     return '⚽';
+    if (n.includes('racing'))                    return '🏎';
+    if (n.includes('puzzle'))                    return '🧩';
+    if (n.includes('horror'))                    return '👻';
+    if (n.includes('shooter'))                   return '🔫';
+    if (n.includes('strategy'))                  return '♟';
+    if (n.includes('simulation'))                return '🌐';
+    if (n.includes('platform'))                  return '🦘';
+    if (n.includes('fighting'))                  return '🥊';
     if (n.includes('music') || n.includes('rhythm')) return '🎵';
     return '🎮';
   };
@@ -308,7 +331,7 @@ function WishlistTab({ games, onEdit, onDelete, onStatusChange }) {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// LAYOUT PRINCIPAL — sidebar unificada para todos os temas
+// LAYOUT PRINCIPAL
 // ═══════════════════════════════════════════════════════════════════════════════
 function Layout({
   user, onLogout, theme, setTheme, games, filtered, stats,
@@ -322,33 +345,18 @@ function Layout({
   const handlePlatformFilter = p => { setPlatformFilter(p); setGenreFilter(''); setFilter('todos'); setSearch(''); setNav('lista'); };
   const handleGenreFilter    = g => { setGenreFilter(g);    setPlatformFilter(''); setFilter('todos'); setSearch(''); setNav('lista'); };
 
-  // Personalização visual por tema — tudo dentro da mesma estrutura de sidebar
-  const isTerminal  = theme === 'terminal';
   const isCyberpunk = theme === 'cyberpunk';
+  const isTerminal  = theme === 'terminal';
   const isNintendo  = theme === 'nintendo';
   const isVintage   = theme === 'vintage';
   const isNordic    = theme === 'nordic';
-  const isSpecial   = isTerminal || isCyberpunk || isNintendo || isVintage;
 
-  // Logo da sidebar varia por tema
-  const sidebarLogo = () => {
-    if (isTerminal)  return <><span style={{ color: 'var(--text3)', fontSize: 11 }}>root@</span><span style={{ color: 'var(--accent)', fontFamily: 'var(--font-display)', fontSize: 13, fontWeight: 700, letterSpacing: 1 }}>BACKLOG</span></>;
-    if (isCyberpunk) return <span style={{ fontFamily: 'var(--font-display)', fontSize: 13, fontWeight: 700, letterSpacing: 3, color: 'var(--accent2)', textShadow: '0 0 10px var(--accent2)' }}>MY_GAME_LIST</span>;
-    if (isNintendo)  return <><span style={{ fontSize: 18 }}>🎮</span><span style={{ fontFamily: 'var(--font-display)', fontSize: 14, fontWeight: 900, color: 'var(--accent)' }}>My Game List!</span></>;
-    if (isVintage)   return <span style={{ fontFamily: 'var(--font-display)', fontSize: 14, fontWeight: 700, fontStyle: 'italic', color: 'var(--text)' }}>My Game List</span>;
-    if (isNordic)    return <><span style={{ fontSize: 18 }}>🎮</span><span style={{ fontFamily: 'var(--font-display)', fontSize: 14, fontWeight: 700, color: 'var(--text)' }}>My Game List</span></>;
-    // dark / light
-    return <><span style={{ fontSize: 18 }}>🎮</span><span style={{ fontFamily: 'var(--font-display)', fontSize: 13, fontWeight: 700, letterSpacing: 1, color: 'var(--text)' }}>MY GAME LIST</span></>;
-  };
-
-  // Título da seção principal
   const sectionTitle = label => {
-    if (isTerminal)  return <span style={{ fontFamily: 'var(--font-body)', fontSize: 12, color: 'var(--text3)', letterSpacing: 1 }}>$ {label.toLowerCase()}</span>;
-    if (isCyberpunk) return <span style={{ fontFamily: 'var(--font-display)', fontSize: 16, fontWeight: 700, letterSpacing: 3, color: 'var(--accent2)', textTransform: 'uppercase', textShadow: '0 0 10px var(--accent2)' }}>{label}</span>;
-    if (isNintendo)  return <span style={{ fontFamily: 'var(--font-display)', fontSize: 18, fontWeight: 900, color: 'var(--accent)' }}>{label}!</span>;
-    if (isVintage)   return <span style={{ fontFamily: 'var(--font-display)', fontSize: 18, fontStyle: 'italic', color: 'var(--text)' }}>— {label} —</span>;
-    if (isNordic)    return <span style={{ fontFamily: 'var(--font-display)', fontSize: 18, fontWeight: 700, color: 'var(--text)' }}>{label}</span>;
-    return <span style={{ fontFamily: 'var(--font-display)', fontSize: 18, fontWeight: 700, letterSpacing: 1, color: 'var(--text)', textTransform: 'uppercase' }}>{label}</span>;
+    if (isTerminal)  return <span style={{ fontFamily: 'var(--font-body)', fontSize: 13, color: 'var(--text3)', letterSpacing: 1 }}>$ {label.toLowerCase()}</span>;
+    if (isCyberpunk) return <span style={{ fontFamily: 'var(--font-display)', fontSize: 18, fontWeight: 700, letterSpacing: 3, color: 'var(--accent2)', textTransform: 'uppercase', textShadow: '0 0 10px var(--accent2)' }}>{label}</span>;
+    if (isNintendo)  return <span style={{ fontFamily: 'var(--font-display)', fontSize: 20, fontWeight: 900, color: 'var(--accent)' }}>{label}!</span>;
+    if (isVintage)   return <span style={{ fontFamily: 'var(--font-display)', fontSize: 20, fontStyle: 'italic', color: 'var(--text)' }}>— {label} —</span>;
+    return <span style={{ fontFamily: 'var(--font-display)', fontSize: 20, fontWeight: 700, letterSpacing: 1, color: 'var(--text)', textTransform: 'uppercase' }}>{label}</span>;
   };
 
   return (
@@ -357,28 +365,74 @@ function Layout({
 
       {/* ══ SIDEBAR ══ */}
       <aside style={{
-        width: 210, flexShrink: 0,
+        width: 260,
+        flexShrink: 0,
         background: isCyberpunk ? 'rgba(10,0,20,0.95)' : 'var(--bg)',
         borderRight: `1px solid ${isCyberpunk ? 'rgba(200,0,255,0.2)' : 'var(--border)'}`,
-        display: 'flex', flexDirection: 'column',
-        position: 'sticky', top: 0, height: '100vh', overflowY: 'auto',
+        display: 'flex',
+        flexDirection: 'column',
+        position: 'sticky',
+        top: 0,
+        height: '100vh',
+        overflowY: 'auto',
       }}>
 
-        {/* Logo */}
+        {/* ── Logo / Título ── */}
         <div style={{
-          padding: '16px 14px 12px',
+          padding: '22px 20px 18px',
           borderBottom: `1px solid ${isCyberpunk ? 'rgba(200,0,255,0.2)' : 'var(--border)'}`,
           background: isNintendo ? 'linear-gradient(135deg, var(--accent) 0%, #ff6688 100%)' : 'transparent',
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10, flexWrap: 'nowrap' }}>
-            {sidebarLogo()}
+          {/* logo + nome */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
+            {isCyberpunk ? (
+              <span style={{ fontSize: 28 }}>⬡</span>
+            ) : isTerminal ? (
+              <span style={{ fontFamily: 'monospace', fontSize: 20, color: 'var(--accent)' }}>&gt;_</span>
+            ) : (
+              <SidebarLogo />
+            )}
+            <div style={{ lineHeight: 1.1 }}>
+              {isCyberpunk ? (
+                <div style={{ fontFamily: 'var(--font-display)', fontSize: 17, fontWeight: 700, letterSpacing: 3, color: 'var(--accent2)', textShadow: '0 0 10px var(--accent2)' }}>MY_GAME_LIST</div>
+              ) : isTerminal ? (
+                <>
+                  <div style={{ fontFamily: 'monospace', fontSize: 11, color: 'var(--text3)', letterSpacing: 1 }}>root@backlog</div>
+                  <div style={{ fontFamily: 'monospace', fontSize: 15, fontWeight: 700, color: 'var(--accent)', letterSpacing: 1 }}>BACKLOG</div>
+                </>
+              ) : isNintendo ? (
+                <div style={{ fontFamily: 'var(--font-display)', fontSize: 17, fontWeight: 900, color: '#fff' }}>My Game List!</div>
+              ) : isVintage ? (
+                <div style={{ fontFamily: 'var(--font-display)', fontSize: 17, fontWeight: 700, fontStyle: 'italic', color: 'var(--text)' }}>My Game List</div>
+              ) : (
+                <>
+                  {/* dark / light / nordic: título grande */}
+                  <div style={{
+                    fontFamily: 'var(--font-display)',
+                    fontSize: 22,
+                    fontWeight: 800,
+                    letterSpacing: 1.5,
+                    color: 'var(--text)',
+                    lineHeight: 1,
+                  }}>BACKLOG</div>
+                  <div style={{
+                    fontSize: 11,
+                    color: 'var(--text3)',
+                    letterSpacing: 0.5,
+                    marginTop: 3,
+                  }}>My Game List</div>
+                </>
+              )}
+            </div>
           </div>
+
+          {/* seletor de tema */}
           <ThemeSelector theme={theme} setTheme={setTheme} themeOpen={themeOpen} setThemeOpen={setThemeOpen} />
         </div>
 
-        {/* Navegação */}
-        <nav style={{ padding: '10px 0', flex: 1 }}>
-          <div style={{ padding: '4px 14px 6px', fontSize: 10, color: 'var(--text3)', letterSpacing: 0.8, textTransform: 'uppercase' }}>
+        {/* ── Navegação ── */}
+        <nav style={{ padding: '12px 0', flex: 1 }}>
+          <div style={{ padding: '6px 20px 8px', fontSize: 11, color: 'var(--text3)', letterSpacing: 1, textTransform: 'uppercase' }}>
             {isTerminal ? '# coleção' : 'Coleção'}
           </div>
           {NAV_ITEMS.map(item => (
@@ -386,29 +440,32 @@ function Layout({
               key={item.key}
               onClick={() => setNav(item.key)}
               style={{
-                display: 'flex', alignItems: 'center', gap: 10, width: '100%',
-                padding: '9px 14px', background: 'none', border: 'none',
+                display: 'flex', alignItems: 'center', gap: 12, width: '100%',
+                padding: '11px 20px', background: 'none', border: 'none',
                 borderLeft: nav === item.key
                   ? `2px solid ${isCyberpunk ? 'var(--accent)' : isNintendo ? '#fff' : 'var(--accent)'}`
                   : '2px solid transparent',
                 color: nav === item.key
                   ? (isNintendo ? '#fff' : 'var(--accent2)')
                   : 'var(--text2)',
-                fontSize: 13, fontFamily: 'var(--font-body)',
+                fontSize: 14,
+                fontFamily: 'var(--font-body)',
                 fontWeight: nav === item.key ? 600 : 400,
                 cursor: 'pointer', transition: 'all 0.15s', textAlign: 'left',
                 textShadow: nav === item.key && isCyberpunk ? '0 0 8px var(--accent)' : 'none',
               }}
+              onMouseEnter={e => { if (nav !== item.key) e.currentTarget.style.color = 'var(--text)'; }}
+              onMouseLeave={e => { if (nav !== item.key) e.currentTarget.style.color = 'var(--text2)'; }}
             >
-              <span style={{ fontSize: 14, opacity: 0.8 }}>{item.icon}</span>
+              <span style={{ fontSize: 15, opacity: 0.7 }}>{item.icon}</span>
               {item.label}
               {item.key === 'wishlist' && stats.wishlist > 0 && (
-                <span style={{ marginLeft: 'auto', background: 'var(--amber-bg)', color: 'var(--amber)', fontSize: 10, padding: '1px 7px', borderRadius: 20 }}>
+                <span style={{ marginLeft: 'auto', background: 'var(--amber-bg)', color: 'var(--amber)', fontSize: 11, padding: '1px 8px', borderRadius: 20 }}>
                   {stats.wishlist}
                 </span>
               )}
               {item.key === 'lista' && (
-                <span style={{ marginLeft: 'auto', background: 'var(--bg3)', color: 'var(--text3)', fontSize: 10, padding: '1px 7px', borderRadius: 20 }}>
+                <span style={{ marginLeft: 'auto', background: 'var(--bg3)', color: 'var(--text3)', fontSize: 11, padding: '1px 8px', borderRadius: 20 }}>
                   {stats.total}
                 </span>
               )}
@@ -417,7 +474,7 @@ function Layout({
 
           {nav === 'lista' && (
             <>
-              <div style={{ padding: '14px 14px 6px', fontSize: 10, color: 'var(--text3)', letterSpacing: 0.8, textTransform: 'uppercase' }}>
+              <div style={{ padding: '16px 20px 8px', fontSize: 11, color: 'var(--text3)', letterSpacing: 1, textTransform: 'uppercase' }}>
                 {isTerminal ? '# status' : 'Status'}
               </div>
               {STATUS_FILTERS.slice(1).map(f => {
@@ -429,16 +486,18 @@ function Layout({
                     onClick={() => { setFilter(f.key); clearFilters(); }}
                     style={{
                       display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                      width: '100%', padding: '7px 14px', background: 'none', border: 'none',
+                      width: '100%', padding: '8px 20px', background: 'none', border: 'none',
                       color: filter === f.key ? 'var(--text)' : 'var(--text3)',
-                      fontSize: 13, fontFamily: 'var(--font-body)',
+                      fontSize: 14, fontFamily: 'var(--font-body)',
                       fontWeight: filter === f.key ? 500 : 400,
-                      cursor: 'pointer', textAlign: 'left',
+                      cursor: 'pointer', textAlign: 'left', transition: 'color 0.15s',
                     }}
+                    onMouseEnter={e => { if (filter !== f.key) e.currentTarget.style.color = 'var(--text2)'; }}
+                    onMouseLeave={e => { if (filter !== f.key) e.currentTarget.style.color = 'var(--text3)'; }}
                   >
                     {f.label}
                     <span style={{
-                      fontSize: 10, padding: '1px 7px', borderRadius: 20,
+                      fontSize: 11, padding: '1px 8px', borderRadius: 20,
                       background: filter === f.key ? 'var(--accent-bg)' : 'var(--bg3)',
                       color: filter === f.key ? 'var(--accent2)' : 'var(--text3)',
                     }}>{count}</span>
@@ -449,24 +508,26 @@ function Layout({
           )}
         </nav>
 
-        {/* Usuário */}
+        {/* ── Usuário ── */}
         <div style={{
-          padding: '10px 14px 14px',
+          padding: '12px 20px 16px',
           borderTop: `1px solid ${isCyberpunk ? 'rgba(200,0,255,0.15)' : 'var(--border)'}`,
-          display: 'flex', alignItems: 'center', gap: 8,
+          display: 'flex', alignItems: 'center', gap: 10,
         }}>
-          <img src={user.photoURL} alt="" width={26} height={26} style={{ borderRadius: '50%', border: '1px solid var(--border2)', flexShrink: 0 }} />
-          <span style={{ fontSize: 13, color: 'var(--text2)', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+          <img src={user.photoURL} alt="" width={30} height={30}
+            style={{ borderRadius: '50%', border: '1px solid var(--border2)', flexShrink: 0 }} />
+          <span style={{ fontSize: 14, color: 'var(--text2)', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
             {user.displayName?.split(' ')[0]}
           </span>
-          <button onClick={onLogout} style={{ background: 'none', border: 'none', color: 'var(--text3)', fontSize: 14, cursor: 'pointer', padding: '2px 4px', lineHeight: 1 }} title="Sair">⏻</button>
+          <button onClick={onLogout}
+            style={{ background: 'none', border: 'none', color: 'var(--text3)', fontSize: 16, cursor: 'pointer', padding: '2px 4px', lineHeight: 1 }}
+            title="Sair">⏻</button>
         </div>
       </aside>
 
       {/* ══ CONTEÚDO PRINCIPAL ══ */}
-      <main style={{ flex: 1, padding: '24px 28px', minWidth: 0 }}>
+      <main style={{ flex: 1, padding: '28px 32px', minWidth: 0 }}>
 
-        {/* ── LISTA ── */}
         {nav === 'lista' && (
           <>
             {/* Stats */}
@@ -483,11 +544,11 @@ function Layout({
                   border: `1px solid ${isCyberpunk ? `${s.c}33` : 'var(--border)'}`,
                   borderBottom: isCyberpunk ? `2px solid ${s.c}` : undefined,
                   borderRadius: isNintendo ? 'var(--radius-lg)' : 'var(--radius)',
-                  padding: '12px 10px', textAlign: 'center',
-                  boxShadow: isNordic ? 'var(--shadow)' : isCyberpunk ? `0 0 12px ${s.c}11` : 'none',
+                  padding: '14px 10px', textAlign: 'center',
+                  boxShadow: isCyberpunk ? `0 0 12px ${s.c}11` : 'none',
                 }}>
                   <div style={{
-                    fontSize: 22, fontWeight: 700, color: s.c,
+                    fontSize: 24, fontWeight: 700, color: s.c,
                     fontFamily: 'var(--font-display)', letterSpacing: 1,
                     textShadow: isCyberpunk ? `0 0 10px ${s.c}` : 'none',
                   }}>{s.n}</div>
@@ -508,13 +569,19 @@ function Layout({
                 {SORTS.map(s => <option key={s.key} value={s.key}>{s.label}</option>)}
               </select>
               <button onClick={() => setModal('new')} style={{
-                background: 'var(--bg)', border: 'none', color: 'var(--text)',
-                borderRadius: isNintendo ? 'var(--radius-btn)' : isCyberpunk ? 2 : 'var(--radius-btn)',
-                padding: '10px 20px', fontSize: 13, fontWeight: 700, cursor: 'pointer',
+                background: 'var(--bg)',
+                border: '1px solid var(--border2)',
+                color: 'var(--text)',
+                borderRadius: 'var(--radius)',
+                padding: '10px 22px', fontSize: 14, fontWeight: 600, cursor: 'pointer',
                 fontFamily: 'var(--font-body)', whiteSpace: 'nowrap',
                 letterSpacing: isCyberpunk ? 2 : 0.5,
-                boxShadow: isCyberpunk ? '0 0 12px var(--accent)' : isNintendo ? '0 4px 0 rgba(0,0,0,0.2)' : 'none',
-              }}>
+                boxShadow: isCyberpunk ? '0 0 12px var(--accent)' : 'none',
+                transition: 'all 0.15s',
+              }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--text2)'; }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border2)'; }}
+              >
                 {isCyberpunk ? '+ ADD' : isNintendo ? '+ Adicionar!' : isVintage ? '+ Registrar' : '+ Adicionar'}
               </button>
             </div>
@@ -524,13 +591,13 @@ function Layout({
               <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 14, flexWrap: 'wrap' }}>
                 <span style={{ fontSize: 12, color: 'var(--text3)' }}>Filtrado por:</span>
                 {platformFilter && (
-                  <span style={{ background: 'var(--accent-bg)', color: 'var(--accent2)', border: '1px solid var(--border-primary)', borderRadius: 20, fontSize: 12, padding: '3px 10px', display: 'flex', alignItems: 'center', gap: 6 }}>
+                  <span style={{ background: 'var(--accent-bg)', color: 'var(--accent2)', border: '1px solid var(--border2)', borderRadius: 20, fontSize: 12, padding: '3px 10px', display: 'flex', alignItems: 'center', gap: 6 }}>
                     🖥 {platformFilter}
                     <button onClick={() => setPlatformFilter('')} style={{ background: 'none', border: 'none', color: 'var(--accent2)', cursor: 'pointer', fontSize: 14, lineHeight: 1, padding: 0 }}>×</button>
                   </span>
                 )}
                 {genreFilter && (
-                  <span style={{ background: 'var(--accent-bg)', color: 'var(--accent2)', border: '1px solid var(--border-primary)', borderRadius: 20, fontSize: 12, padding: '3px 10px', display: 'flex', alignItems: 'center', gap: 6 }}>
+                  <span style={{ background: 'var(--accent-bg)', color: 'var(--accent2)', border: '1px solid var(--border2)', borderRadius: 20, fontSize: 12, padding: '3px 10px', display: 'flex', alignItems: 'center', gap: 6 }}>
                     ◈ {genreFilter}
                     <button onClick={() => setGenreFilter('')} style={{ background: 'none', border: 'none', color: 'var(--accent2)', cursor: 'pointer', fontSize: 14, lineHeight: 1, padding: 0 }}>×</button>
                   </span>
@@ -552,7 +619,6 @@ function Layout({
           </>
         )}
 
-        {/* ── PLATAFORMAS ── */}
         {nav === 'plataformas' && (
           <>
             <div style={{ marginBottom: 20 }}>{sectionTitle('Plataformas')}</div>
@@ -560,7 +626,6 @@ function Layout({
           </>
         )}
 
-        {/* ── GÊNEROS ── */}
         {nav === 'generos' && (
           <>
             <div style={{ marginBottom: 20 }}>{sectionTitle('Gêneros')}</div>
@@ -568,7 +633,6 @@ function Layout({
           </>
         )}
 
-        {/* ── WISHLIST ── */}
         {nav === 'wishlist' && (
           <>
             <div style={{ marginBottom: 20 }}>{sectionTitle('Wishlist')}</div>
@@ -577,19 +641,11 @@ function Layout({
         )}
       </main>
 
-      {/* ── Modais ── */}
       {modal && (
-        <GameModal
-          game={modal === 'new' ? null : modal}
-          onSave={handleSave}
-          onClose={() => setModal(null)}
-        />
+        <GameModal game={modal === 'new' ? null : modal} onSave={handleSave} onClose={() => setModal(null)} />
       )}
       {confirmDel && (
-        <ConfirmDeleteModal
-          onConfirm={() => handleDelete(confirmDel)}
-          onCancel={() => setConfirmDel(null)}
-        />
+        <ConfirmDeleteModal onConfirm={() => handleDelete(confirmDel)} onCancel={() => setConfirmDel(null)} />
       )}
     </div>
   );
