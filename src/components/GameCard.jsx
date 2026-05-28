@@ -48,22 +48,23 @@ export function GameCard({ game, onEdit, onDelete, onStatusChange }) {
       {/* ── BACKGROUND: cover com blur + overlay escuro ── */}
       {game.coverUrl && (
         <>
+          {/* imagem borrada cobrindo o card inteiro */}
           <div style={{
             position: 'absolute',
             inset: 0,
             backgroundImage: `url(${game.coverUrl})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            filter: 'blur(28px) saturate(1.4)',
-            transform: 'scale(1.1)',
-            opacity: 0.18,
+            filter: 'blur(22px) saturate(1.6) brightness(0.7)',
+            transform: 'scale(1.15)',
+            opacity: 0.55,
             zIndex: 0,
           }} />
-          {/* overlay gradiente: escurece mais à esquerda (onde fica a capa) */}
+          {/* overlay escuro semi-transparente para legibilidade */}
           <div style={{
             position: 'absolute',
             inset: 0,
-            background: 'linear-gradient(90deg, rgba(0,0,0,0.10) 0%, var(--bg2) 38%, var(--bg2) 100%)',
+            background: 'linear-gradient(90deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.60) 30%, rgba(0,0,0,0.72) 100%)',
             zIndex: 1,
           }} />
         </>
