@@ -411,7 +411,7 @@ body {
    INPUTS / SELECTS
    ============================================================ */
 input, textarea, select {
-  background: var(--bg3);
+  background: var(--bg);
   border: 1px solid var(--border2);
   border-radius: var(--radius);
   color: var(--text);

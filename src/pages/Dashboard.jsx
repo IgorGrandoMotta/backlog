@@ -479,7 +479,7 @@ function Layout({
                 { n: stats.wishlist, l: 'Wishlist', c: 'var(--amber)' },
               ].map(s => (
                 <div key={s.l} style={{
-                  background: 'var(--bg2)',
+                  background: 'var(--bg3)',
                   border: `1px solid ${isCyberpunk ? `${s.c}33` : 'var(--border)'}`,
                   borderBottom: isCyberpunk ? `2px solid ${s.c}` : undefined,
                   borderRadius: isNintendo ? 'var(--radius-lg)' : 'var(--radius)',
@@ -508,7 +508,7 @@ function Layout({
                 {SORTS.map(s => <option key={s.key} value={s.key}>{s.label}</option>)}
               </select>
               <button onClick={() => setModal('new')} style={{
-                background: 'var(--accent)', border: 'none', color: '#fff',
+                background: 'var(--bg)', border: 'none', color: 'var(--text)',
                 borderRadius: isNintendo ? 'var(--radius-btn)' : isCyberpunk ? 2 : 'var(--radius-btn)',
                 padding: '10px 20px', fontSize: 13, fontWeight: 700, cursor: 'pointer',
                 fontFamily: 'var(--font-body)', whiteSpace: 'nowrap',
