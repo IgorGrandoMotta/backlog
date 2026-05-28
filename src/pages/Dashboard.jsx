@@ -352,13 +352,13 @@ function Layout({
   };
 
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', background: 'var(--bg)' }}>
+    <div style={{ display: 'flex', minHeight: '100vh', background: 'var(--bg2)' }}>
       <SavedToast visible={toastVisible} />
 
       {/* ══ SIDEBAR ══ */}
       <aside style={{
         width: 210, flexShrink: 0,
-        background: isCyberpunk ? 'rgba(10,0,20,0.95)' : 'var(--bg2)',
+        background: isCyberpunk ? 'rgba(10,0,20,0.95)' : 'var(--bg)',
         borderRight: `1px solid ${isCyberpunk ? 'rgba(200,0,255,0.2)' : 'var(--border)'}`,
         display: 'flex', flexDirection: 'column',
         position: 'sticky', top: 0, height: '100vh', overflowY: 'auto',
