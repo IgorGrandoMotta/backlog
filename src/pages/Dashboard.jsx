@@ -131,7 +131,6 @@ function ThemeSelector({ theme, setTheme, themeOpen, setThemeOpen, light }) {
 
 // ─── Aba: Plataformas ─────────────────────────────────────────────────────────
 function PlatformsTab({ games, onPlatformFilter, setNav }) {
-  // Agrupa jogos por plataforma
   const platforms = useMemo(() => {
     const map = {};
     games.forEach(g => {
@@ -212,7 +211,6 @@ function PlatformsTab({ games, onPlatformFilter, setNav }) {
                   {platformGames.length} jogo{platformGames.length !== 1 ? 's' : ''}
                 </div>
               </div>
-              {/* Barra de progresso: zerados / total */}
               <div>
                 <div style={{ display:'flex', gap:6, fontSize:11, color:'var(--text3)', marginBottom:4, flexWrap:'wrap' }}>
                   {zerados  > 0 && <span style={{ color:'var(--green)' }}>✓ {zerados} zerado{zerados !== 1 ? 's' : ''}</span>}
@@ -348,7 +346,6 @@ function WishlistTab({ games, onEdit, onDelete, onStatusChange }) {
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // LAYOUT PADRÃO — dark, light, nordic
-// Sidebar lateral + conteúdo principal
 // ═══════════════════════════════════════════════════════════════════════════════
 function DefaultLayout({
   user, onLogout, theme, setTheme, games, filtered, stats,
@@ -422,14 +419,13 @@ function DefaultLayout({
             </button>
           ))}
 
-          {/* Filtro rápido por status (só aparece em "lista") */}
           {nav === 'lista' && (
             <>
               <div style={{ padding:'16px 16px 8px', fontSize:10, color:'var(--text3)', letterSpacing:0.8, textTransform:'uppercase' }}>
                 Status
               </div>
               {STATUS_FILTERS.slice(1).map(f => {
-                const count = f.key === 'todos' ? games.length : games.filter(g => g.status === f.key).length;
+                const count = games.filter(g => g.status === f.key).length;
                 if (count === 0) return null;
                 return (
                   <button key={f.key} onClick={() => { setFilter(f.key); clearFilters(); }} style={{
@@ -471,10 +467,8 @@ function DefaultLayout({
       {/* ── Conteúdo principal ── */}
       <main style={{ flex:1, padding:'24px 28px', minWidth:0 }}>
 
-        {/* ── LISTA ── */}
         {nav === 'lista' && (
           <>
-            {/* Stats */}
             <div style={{ display:'grid', gridTemplateColumns:'repeat(5,1fr)', gap:10, marginBottom:24 }}>
               {[
                 { n: stats.total,    l:'Total',    c:'var(--text)' },
@@ -490,7 +484,6 @@ function DefaultLayout({
               ))}
             </div>
 
-            {/* Barra de busca + sort + botão */}
             <div style={{ display:'flex', gap:10, alignItems:'center', marginBottom:14, flexWrap:'wrap' }}>
               <input
                 value={search}
@@ -511,7 +504,6 @@ function DefaultLayout({
               </button>
             </div>
 
-            {/* Filtros ativos (plataforma / gênero) */}
             {(platformFilter || genreFilter) && (
               <div style={{ display:'flex', gap:8, alignItems:'center', marginBottom:14, flexWrap:'wrap' }}>
                 <span style={{ fontSize:12, color:'var(--text3)' }}>Filtrado por:</span>
@@ -533,7 +525,6 @@ function DefaultLayout({
               </div>
             )}
 
-            {/* Lista de jogos */}
             <div style={{ display:'flex', flexDirection:'column', gap: isNordic ? 12 : 10 }}>
               {filtered.length === 0
                 ? (
@@ -550,7 +541,6 @@ function DefaultLayout({
           </>
         )}
 
-        {/* ── PLATAFORMAS ── */}
         {nav === 'plataformas' && (
           <>
             <div style={{ marginBottom:20 }}>
@@ -562,7 +552,6 @@ function DefaultLayout({
           </>
         )}
 
-        {/* ── GÊNEROS ── */}
         {nav === 'generos' && (
           <>
             <div style={{ marginBottom:20 }}>
@@ -574,7 +563,6 @@ function DefaultLayout({
           </>
         )}
 
-        {/* ── WISHLIST ── */}
         {nav === 'wishlist' && (
           <>
             <div style={{ marginBottom:20 }}>
@@ -594,7 +582,7 @@ function DefaultLayout({
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// LAYOUT: TERMINAL — mantido igual (estética própria, sem sidebar)
+// LAYOUT: TERMINAL
 // ═══════════════════════════════════════════════════════════════════════════════
 function TerminalLayout({ user, onLogout, theme, setTheme, games, filtered, stats,
   filter, setFilter, sort, setSort, search, setSearch, setModal, setConfirmDel,
@@ -656,7 +644,7 @@ function TerminalLayout({ user, onLogout, theme, setTheme, games, filtered, stat
 const termBtn = { background:'transparent', border:'1px solid var(--border2)', color:'var(--text2)', borderRadius:0, padding:'4px 10px', fontSize:11, fontFamily:'var(--font-body)', letterSpacing:1, textTransform:'uppercase', cursor:'pointer' };
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// LAYOUT: CYBERPUNK — mantido igual
+// LAYOUT: CYBERPUNK
 // ═══════════════════════════════════════════════════════════════════════════════
 function CyberpunkLayout({ user, onLogout, theme, setTheme, games, filtered, stats,
   filter, setFilter, sort, setSort, search, setSearch, setModal, setConfirmDel,
@@ -711,7 +699,7 @@ function CyberpunkLayout({ user, onLogout, theme, setTheme, games, filtered, sta
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// LAYOUT: NINTENDO — mantido igual
+// LAYOUT: NINTENDO
 // ═══════════════════════════════════════════════════════════════════════════════
 function NintendoLayout({ user, onLogout, theme, setTheme, games, filtered, stats,
   filter, setFilter, sort, setSort, search, setSearch, setModal, setConfirmDel,
@@ -769,7 +757,7 @@ function NintendoLayout({ user, onLogout, theme, setTheme, games, filtered, stat
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// LAYOUT: VINTAGE — mantido igual
+// LAYOUT: VINTAGE
 // ═══════════════════════════════════════════════════════════════════════════════
 function VintageLayout({ user, onLogout, theme, setTheme, games, filtered, stats,
   filter, setFilter, sort, setSort, search, setSearch, setModal, setConfirmDel,
@@ -825,17 +813,17 @@ function VintageLayout({ user, onLogout, theme, setTheme, games, filtered, stats
 export function Dashboard({ user, onLogout }) {
   const { games, loading, addGame, updateGame, deleteGame } = useGames(user.uid);
   const { theme, setTheme } = useTheme();
-  const [nav,           setNav]           = useState('lista');
-  const [filter,        setFilter]        = useState('todos');
-  const [sort,          setSort]          = useState('recent');
-  const [search,        setSearch]        = useState('');
+  const [nav,            setNav]            = useState('lista');
+  const [filter,         setFilter]         = useState('todos');
+  const [sort,           setSort]           = useState('recent');
+  const [search,         setSearch]         = useState('');
   const [platformFilter, setPlatformFilter] = useState('');
   const [genreFilter,    setGenreFilter]    = useState('');
-  const [modal,         setModal]         = useState(null);
-  const [confirmDel,    setConfirmDel]    = useState(null);
-  const [themeOpen,     setThemeOpen]     = useState(false);
-  const [toastVisible,  setToastVisible]  = useState(false);
-  const [toastTimer,    setToastTimer]    = useState(null);
+  const [modal,          setModal]          = useState(null);
+  const [confirmDel,     setConfirmDel]     = useState(null);
+  const [themeOpen,      setThemeOpen]      = useState(false);
+  const [toastVisible,   setToastVisible]   = useState(false);
+  const [toastTimer,     setToastTimer]     = useState(null);
 
   const showToast = useCallback(() => {
     setToastVisible(true);
